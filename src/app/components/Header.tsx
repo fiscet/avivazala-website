@@ -3,6 +3,7 @@ import MobileMenuButton from './MobileMenuButton';
 import MobileMenu from './MobileMenu';
 import DesktopMenu from './DesktopMenu';
 import ContentWrapper from './ContentWrapper';
+import React from 'react';
 
 export default function Header() {
   return (
@@ -18,11 +19,13 @@ export default function Header() {
         <div className="hidden lg:block">Desktop Search</div>
       </div>
       <div className="flex justify-between">
-        <div className="navbar lg:justify-center">
-          <div className="navbar-start pl-8 lg:hidden">
+        <div className="navbar  m-0 p-0 lg:justify-center">
+          <div className="navbar-start lg:hidden">
             <div className="dropdown">
-              <MobileMenuButton />
-              <MobileMenu />
+              <ContentWrapper y={false}>
+                <MobileMenuButton />
+                <MobileMenu />
+              </ContentWrapper>
             </div>
           </div>
           <div className="navbar-center hidden lg:flex">

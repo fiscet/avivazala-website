@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { Ubuntu } from 'next/font/google';
 import './globals.css';
-import Header from './components/Header';
-import ContentWrapper from './components/ContentWrapper';
+import Header from '@components/Header';
+import ContentWrapper from '@components/ContentWrapper';
+import React from 'react';
 
 const baseFont = Ubuntu({
   subsets: ['latin'],
@@ -23,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="hu">
+    <html lang="hu" data-theme="nord">
       <body className={baseFont.className}>
         <div className="container h-lvh mx-auto bg-white">
           <Header />

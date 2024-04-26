@@ -17,7 +17,9 @@
         "name": "next"
       }
     ],
+    "baseUrl": "./src/app/",
     "paths": {
+      "@components/*": ["components/*"],
       "import/*": ["./src/*"]
     }
   },

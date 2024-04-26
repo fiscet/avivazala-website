@@ -1,4 +1,4 @@
-export default function DesktopMenu() {
+export default function DesktopMenuComponent() {
   return (
     <ul className="menu menu-horizontal px-1">
       <li>
@@ -7,7 +7,7 @@ export default function DesktopMenu() {
       <li>
         <details>
           <summary>Parent</summary>
-          <ul className="p-2">
+          <ul className="p-2" style={{ marginTop: '4px' }}>
             <li>
               <a>Submenu 11</a>
             </li>

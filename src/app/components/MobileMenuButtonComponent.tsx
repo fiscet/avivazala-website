@@ -1,4 +1,4 @@
-export default function MobileMenuButton() {
+export default function MobileMenuButtonComponent() {
   return (
     <div tabIndex={0} role="button" className="btn lg:hidden">
       <svg

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { Ubuntu } from 'next/font/google';
 import './globals.css';
-import Header from '@components/Header';
-import ContentWrapper from '@components/ContentWrapper';
+import Header from '@components/HeaderComponent';
+import ContentWrapper from '@components/ContentWrapperComponent';
 import React from 'react';
 
 const baseFont = Ubuntu({

@@ -7,7 +7,7 @@ export type ContentWrapperProps = {
   children: ReactNode;
 };
 
-export default function ContentWrapper({
+export default function ContentWrapperComponent({
   children,
   x = true,
   y = true

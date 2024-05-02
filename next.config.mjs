@@ -7,6 +7,6 @@ const nextConfig = {
   },
 };
 
-const withNextIntl = nextIntl('./src/i18n.ts');
+const withNextIntl = nextIntl('./src/app/lib/i18n.ts');
 
 export default withNextIntl(nextConfig);

@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import { Ubuntu } from 'next/font/google';
-import '../globals.css';
+import 'globals.css';
 import Header from '@components/HeaderComponent';
 import ContentWrapper from '@components/ContentWrapperComponent';
-import { defaultLocale } from '@lib/constants';
+import { defaultLocale } from '@lib/i18n';
 
 const baseFont = Ubuntu({
   subsets: ['latin'],
@@ -15,7 +15,7 @@ export default async function RootLayout({
   params,
 }: Readonly<{
   children: ReactNode;
-  params: any;
+  params: { locale: string };
 }>) {
   const locale = params.locale || defaultLocale;
 

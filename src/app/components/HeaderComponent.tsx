@@ -1,15 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
-import { getMainMenu } from '@lib/sanity/fetchers';
 import Search from './Search';
 import MainNavbarMobile from './MobileMainNavbarComponent';
 import MainNavbarDesktop from './DesktopMainNavbarComponent';
 import MobileMenu from './MobileMainMenuComponent';
 import DesktopMainMenu from './DesktopMainMenuComponent';
 import { SanityMenuBuilder } from 'helpers/parseSanityMenu';
+import Link from 'next/link';
 
 export default async function HeaderComponent({ locale }: { locale: string }) {
-  // const res = await getMainMenu();
   const menuBulder = new SanityMenuBuilder(locale);
 
   return (
@@ -23,6 +22,12 @@ export default async function HeaderComponent({ locale }: { locale: string }) {
         </div>
         <div className="hidden lg:block">
           <Search />
+          <Link locale="en" href="/en">
+            Switch to EN
+          </Link>
+          <Link locale="hu" href="/hu">
+            Switch to HU
+          </Link>
         </div>
       </div>
       <div className="flex justify-between lg:hidden">

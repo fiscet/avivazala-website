@@ -1,11 +1,4 @@
-import { getMainMenu } from '@lib/sanity/fetchers';
-import { internalGroqTypeReferenceTo } from 'types/sanity.types';
-
-export default async function MobileMenuComponent() {
-  const res = await getMainMenu();
-
-// console.log(res.items[0].navigationItemUrl?.internalLink)
-console.log(res.pages[0].slug?.hu)
+export default function MobileMenuComponent() {
   return (
     <ul
       tabIndex={0}

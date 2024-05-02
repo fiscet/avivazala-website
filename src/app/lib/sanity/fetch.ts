@@ -21,7 +21,7 @@ export async function sanityFetch<QueryResponse>({
    * When outside of the Sanity Studio we also support the Vercel Toolbar Visual Editing feature, which is only enabled in production when it's a Vercel Preview Deployment.
    */
   stega = perspective === "previewDrafts" ||
-    process.env.VERCEL_ENV === "preview",
+  process.env.VERCEL_ENV === "preview",
 }: {
   query: string;
   params?: QueryParams;

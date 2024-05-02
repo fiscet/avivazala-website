@@ -1,8 +1,12 @@
+import nextIntl from 'next-intl/plugin';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     domains: [`cdn.sanity.io`],
-  }
+  },
 };
 
-export default nextConfig;
+const withNextIntl = nextIntl('./src/i18n.ts');
+
+export default withNextIntl(nextConfig);

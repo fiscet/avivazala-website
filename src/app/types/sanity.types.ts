@@ -68,14 +68,24 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type PostCategory = {
+export type CustomSettings = {
   _id: string;
-  _type: "postCategory";
+  _type: "customSettings";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: LocaleString;
-  description?: LocaleText;
+  key?: string;
+  value?: Array<string>;
+};
+
+export type LanguagesAvailable = {
+  _id: string;
+  _type: "languagesAvailable";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  languages?: Array<"hu" | "en">;
+  langDefault?: Array<"hu" | "en">;
 };
 
 export type Navigation = {
@@ -114,6 +124,9 @@ export type Event = {
   publicationStartDate?: string;
   publicationEndDate?: string;
   active?: boolean;
+  attendants?: Array<{
+    _key: string;
+  } & EventAttendant>;
 };
 
 export type EventType = {
@@ -125,6 +138,16 @@ export type EventType = {
   title?: LocaleString;
   description?: LocaleBlockContent;
   active?: boolean;
+};
+
+export type PostCategory = {
+  _id: string;
+  _type: "postCategory";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: LocaleString;
+  description?: LocaleText;
 };
 
 export type Post = {
@@ -283,7 +306,7 @@ export type Page = {
 export type NavigationItem = {
   _type: "navigationItem";
   title?: LocaleString;
-  navigationItemUrl?: NavigationLink;
+  navigationItemLink?: NavigationLink;
 };
 
 export type NavigationLink = {
@@ -300,6 +323,9 @@ export type NavigationLink = {
     [internalGroqTypeReferenceTo]?: "post";
   };
   externalUrl?: string;
+  submenu?: Array<{
+    _key: string;
+  } & NavigationItem>;
 };
 
 export type LocaleText = {
@@ -386,6 +412,13 @@ export type LocaleBlockContent = {
     _type: "image";
     _key: string;
   }>;
+};
+
+export type EventAttendant = {
+  _type: "eventAttendant";
+  fullName?: string;
+  email?: string;
+  phone?: string;
 };
 
 export type BlockContent = Array<{

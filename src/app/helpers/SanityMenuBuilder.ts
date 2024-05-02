@@ -1,6 +1,6 @@
 import { getMainMenu } from "@lib/sanity/fetchers";
-import { FullNavigation, LocalizedField, WebsiteMenu, WebsiteMenuItem } from "types/local.types";
-import { LocaleSlug, LocaleString, NavigationItem, Page, Post } from "types/sanity.types";
+import { FullNavigation, LocalizedField, NavigationItemWithKey, WebsiteMenu, WebsiteMenuItem } from "types/local.types";
+import { LocaleSlug, LocaleString, Page, Post } from "types/sanity.types";
 
 export class SanityMenuBuilder {
   private locale: string;
@@ -9,38 +9,41 @@ export class SanityMenuBuilder {
 
   constructor(locale: string) {
     this.locale = locale;
-    this.start();
   }
 
-  private async start() {
+  public async getMenuData() {
     const sanityNavigation = await getMainMenu();
 
     this.allRefPostPages = [...sanityNavigation.pages, ...sanityNavigation.subpages];
     this.allRefPostPages = this.allRefPostPages.filter(item => item);
 
-    this.finalMenu.items = this.parseNavigationItemsArray(sanityNavigation.items as NavigationItem[]);
+    this.finalMenu.items = this.parseNavigationItems(sanityNavigation.items as NavigationItemWithKey[]);
+
+    return this.finalMenu;
   }
 
-  private parseNavigationItemsArray = (navigationItems: NavigationItem[]) => {
+  private parseNavigationItems = (navigationItems: NavigationItemWithKey[]) => {
     return navigationItems.map((navigationItem) => {
 
       const newItem = this.parseNavigationItem(navigationItem, this.allRefPostPages);
 
       if (navigationItem.navigationItemLink?.submenu) {
-        newItem.submenu = this.parseNavigationItemsArray(navigationItem.navigationItemLink?.submenu);
+        newItem.submenu = this.parseNavigationItems(navigationItem.navigationItemLink?.submenu);
       }
 
       return newItem;
     });
   };
 
-  private parseNavigationItem = (navigationItem: NavigationItem, pages?: FullNavigation["pages"]): WebsiteMenuItem => {
+  private parseNavigationItem = (navigationItem: NavigationItemWithKey, pages?: FullNavigation["pages"]): WebsiteMenuItem => {
     const label = this.getLocalizedField(navigationItem?.title as LocaleString, this.locale);
+    let id = '';
     let linkTo = '#';
 
     const { navigationItemLink } = navigationItem;
 
     if (navigationItemLink?.externalUrl) {
+      id = navigationItemLink.externalUrl;
       linkTo = navigationItemLink.externalUrl;
     }
 
@@ -53,6 +56,7 @@ export class SanityMenuBuilder {
     }
 
     return {
+      id: navigationItem._key,
       label,
       linkTo
     };

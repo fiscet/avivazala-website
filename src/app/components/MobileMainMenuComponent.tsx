@@ -1,26 +1,28 @@
-export default function MobileMenuComponent() {
+import { WebsiteMenu } from 'types/local.types';
+import MainMenuItem from './MainMenuItem';
+
+export type MobileMenuComponentProps = {
+  menu: WebsiteMenu;
+};
+
+export default function MobileMenuComponent({
+  menu,
+}: MobileMenuComponentProps) {
   return (
     <ul
       tabIndex={0}
-      className="menu menu-sm dropdown-content mt-1 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-    >
-      <li>
-        <a>Item 1</a>
-      </li>
-      <li>
-        <a>Parent</a>
-        <ul className="p-2">
-          <li>
-            <a>Submenu 1</a>
-          </li>
-          <li>
-            <a>Submenu 2</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a>Item 3</a>
-      </li>
+      className="menu menu-sm dropdown-content mt-1 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+      {menu.items.map((menuItem) => {
+        return (
+          <MainMenuItem
+            id={menuItem.id}
+            label={menuItem.label}
+            linkTo={menuItem.linkTo}
+            submenu={menuItem.submenu}
+            key={menuItem.id}
+          />
+        );
+      })}
     </ul>
   );
 }

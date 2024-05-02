@@ -5,11 +5,13 @@ import MainNavbarMobile from './MobileMainNavbarComponent';
 import MainNavbarDesktop from './DesktopMainNavbarComponent';
 import MobileMenu from './MobileMainMenuComponent';
 import DesktopMainMenu from './DesktopMainMenuComponent';
-import { SanityMenuBuilder } from 'helpers/parseSanityMenu';
+import { SanityMenuBuilder } from 'helpers/SanityMenuBuilder';
 import Link from 'next/link';
 
 export default async function HeaderComponent({ locale }: { locale: string }) {
-  const menuBulder = new SanityMenuBuilder(locale);
+  const menuBuilder = new SanityMenuBuilder(locale);
+
+  const menu = await menuBuilder.getMenuData();
 
   return (
     <header
@@ -32,12 +34,12 @@ export default async function HeaderComponent({ locale }: { locale: string }) {
       </div>
       <div className="flex justify-between lg:hidden">
         <MainNavbarMobile>
-          <MobileMenu />
+          <MobileMenu menu={menu} />
         </MainNavbarMobile>
         <Search />
       </div>
       <MainNavbarDesktop>
-        <DesktopMainMenu />
+        <DesktopMainMenu menu={menu} />
       </MainNavbarDesktop>
     </header>
   );

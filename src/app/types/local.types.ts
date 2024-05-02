@@ -5,7 +5,12 @@ export type FullNavigation = Partial<Navigation> & {
   subpages: Partial<Page | Post>[];
 };
 
+export type NavigationItemWithKey = {
+  _key: string;
+} & NavigationItem;
+
 export type WebsiteMenuItem = {
+  id: string;
   label: string;
   linkTo: string;
   submenu?: WebsiteMenuItem[];

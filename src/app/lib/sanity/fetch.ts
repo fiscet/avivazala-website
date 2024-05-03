@@ -14,7 +14,8 @@ const token = process.env.NEXT_SANITY_API_READ_TOKEN;
 export async function sanityFetch<QueryResponse>({
   query,
   params = {},
-  perspective = draftMode().isEnabled ? "previewDrafts" : "published",
+  perspective = "published",
+  // perspective = draftMode().isEnabled ? "previewDrafts" : "published",
   /**
    * Stega embedded Content Source Maps are used by Visual Editing by both the Sanity Presentation Tool and Vercel Visual Editing.
    * The Sanity Presentation Tool will enable Draft Mode when loading up the live preview, and we use it as a signal for when to embed source maps.

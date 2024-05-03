@@ -12,28 +12,28 @@ export const metadata: Metadata = {
   robots: process.env.ROBOTS,
 };
 
-export async function generateStaticParams() {
-  const allSlugs = await getPageSlugs();
+// export async function generateStaticParams() {
+//   const allSlugs = await getPageSlugs();
 
-  const res = allSlugs.flatMap((slugItem, i) => {
-    const fieldArray = Object.entries(slugItem.slug);
+//   const res = allSlugs.flatMap((slugItem, i) => {
+//     const fieldArray = Object.entries(slugItem.slug);
 
-    const localizedSlugs = fieldArray.filter((item) => item[0] !== '_type');
+//     const localizedSlugs = fieldArray.filter((item) => item[0] !== '_type');
 
-    return localizedSlugs.map((field) => {
-      if (field[0] !== '_type') {
-        const slug =
-          (field[1] as Slug).current === '/' ? '' : (field[1] as Slug).current;
+//     return localizedSlugs.map((field) => {
+//       if (field[0] !== '_type') {
+//         const slug =
+//           (field[1] as Slug).current === '/' ? '' : (field[1] as Slug).current;
 
-        return `/${field[0]}/${slug}`;
-      }
-    });
-  });
+//         return `/${field[0]}/${slug}`;
+//       }
+//     });
+//   });
 
-  return res;
-}
+//   return res;
+// }
 
-export default async function Home({
+export default async function BlogPage({
   params,
 }: {
   params: { slug?: string[] };
@@ -43,7 +43,7 @@ export default async function Home({
 
   return (
     <main>
-      Generic {t('hello')}: {locale} | {params.slug}
+      Blog Page {t('hello')}: {locale} | {params.slug?.join(', ')}
       {/* <SanityContent
         className="mx-auto max-w-2xl"
         value={post.content as PortableTextBlock[]}

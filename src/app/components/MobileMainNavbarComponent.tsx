@@ -3,10 +3,12 @@ import ContentWrapper from './ContentWrapperComponent';
 import MobileMenuButton from './MobileMenuButtonComponent';
 
 export type MobileMainNavbarComponentProps = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
-export default function MobileMainNavbarComponent({children}: MobileMainNavbarComponentProps) {
+export default function MobileMainNavbarComponent({
+  children,
+}: MobileMainNavbarComponentProps) {
   return (
     <div className="navbar m-0 p-0 lg:hidden">
       <div className="navbar-start">

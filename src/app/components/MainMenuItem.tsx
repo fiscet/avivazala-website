@@ -34,7 +34,6 @@ const DesktopItem = ({ label, submenu }: MainMenuItemProps) => {
   return (
     <details>
       <summary>{label}</summary>
-
       {submenu && submenu.length && (
         <ul className="p-2" style={{ marginTop: '4px' }}>
           {submenu.map((subMenuItem) => (

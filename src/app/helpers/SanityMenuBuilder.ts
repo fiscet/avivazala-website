@@ -1,3 +1,4 @@
+import { slugPerType } from "@lib/config";
 import { getMainMenu } from "@lib/sanity/fetchers";
 import { FullNavigation, LocalizedField, NavigationItemWithKey, WebsiteMenu, WebsiteMenuItem } from "types/local.types";
 import { LocaleSlug, LocaleString, Page, Post } from "types/sanity.types";
@@ -16,6 +17,7 @@ export class SanityMenuBuilder {
 
     this.allRefPostPages = [...sanityNavigation.pages, ...sanityNavigation.subpages];
     this.allRefPostPages = this.allRefPostPages.filter(item => item);
+
 
     this.finalMenu.items = this.parseNavigationItems(sanityNavigation.items as NavigationItemWithKey[]);
 
@@ -52,7 +54,9 @@ export class SanityMenuBuilder {
 
       const page = pages.find(item => { return item._id === id; });
 
-      linkTo = `/${this.locale}/${this.getLocalizedField(page?.slug as LocaleSlug, this.locale, true)}`;
+      const slugTrunk = slugPerType.get(page!._type!) ?? '';
+
+      linkTo = `/${this.locale}/${slugTrunk}${this.getLocalizedField(page?.slug as LocaleSlug, this.locale, true)}`;
     }
 
     return {

@@ -1,4 +1,4 @@
-import { LocaleSlug, LocaleString, LocaleText, Navigation, NavigationItem, Page, Post } from "./sanity.types";
+import { LocaleSlug, LocaleString, LocaleText, Navigation, NavigationItem, Page, Post, SanityImageDimensions } from "./sanity.types";
 
 export type FullNavigation = Partial<Navigation> & {
   pages: Partial<Page | Post>[],
@@ -21,3 +21,10 @@ export type WebsiteMenu = {
 };
 
 export type LocalizedField = LocaleString | LocaleText | LocaleSlug;
+
+export type WebPage = Partial<Page> & {
+  pageImage: {
+    url: string,
+    dimensione: SanityImageDimensions;
+  };
+};

@@ -1,3 +1,4 @@
+import { Locale } from "@lib/i18n";
 import { groq } from "next-sanity";
 
 export const mainMenuQuery = groq`*[_type == "navigation" && navId.current == "main-menu"][0] { 
@@ -16,6 +17,15 @@ export const mainMenuQuery = groq`*[_type == "navigation" && navId.current == "m
 
 export const pageSlugsQuery = groq`*[_type == "page"] {
   slug
+}`;
+
+export const preparePageQuery = (locale: Locale) => `*[_type == "page" && slug[$locale].current == $slug][0] {
+  title{${locale}},
+  body{${locale}},
+  "pageImage": {
+    "url": mainImage.asset->url,
+    "dimensions": mainImage.asset->metadata.dimensions
+  }
 }`;
 
 /* Not used yet */

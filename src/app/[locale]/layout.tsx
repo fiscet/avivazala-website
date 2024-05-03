@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 const baseFont = Ubuntu({
   subsets: ['latin'],
-  weight: '300',
+  weight: ['300', '400', '500', '700'],
 });
 
 export default async function RootLayout({

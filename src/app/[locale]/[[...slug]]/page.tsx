@@ -1,9 +1,10 @@
+import type { Metadata } from 'next';
+import Image from 'next/image';
 import { PortableTextBlock } from 'next-sanity';
 import { Locale } from '@lib/i18n';
-import type { Metadata } from 'next';
 import { getTranslations, getLocale } from 'next-intl/server';
 import SanityContent from '@components/SanityContent';
-import { getPageSlugs } from '@lib/sanity/fetchers';
+import { getPageSlugs, getSinglePage } from '@lib/sanity/fetchers';
 import { Slug } from 'types/sanity.types';
 
 export const metadata: Metadata = {
@@ -38,16 +39,32 @@ export default async function Home({
 }: {
   params: { slug?: string[] };
 }) {
-  const locale = (await getLocale()) as Locale;
   const t = await getTranslations('Home');
+  const locale = (await getLocale()) as Locale;
+  const slug = params?.slug ?? ['/'];
+
+  const pageData = await getSinglePage(locale, slug[0]);
+
+  console.log('pageData', pageData);
 
   return (
     <main>
       Generic {t('hello')}: {locale} | {params.slug}
-      {/* <SanityContent
-        className="mx-auto max-w-2xl"
-        value={post.content as PortableTextBlock[]}
-      /> */}
+      {pageData.body && (
+        <>
+          <Image
+            src={pageData.pageImage.url}
+            width={500}
+            height={300}
+            alt={'fff'}
+            style={{ width: '60%' }}
+          />
+          <SanityContent
+            className="mx-auto max-w-2xl"
+            value={pageData.body[locale] as PortableTextBlock[]}
+          />
+        </>
+      )}
     </main>
   );
 }

@@ -324,6 +324,9 @@ export type LocaleBlockContent = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    alt?: string;
+    size?: "sm" | "md" | "lg";
+    alignment?: "left" | "center" | "right";
     _type: "image";
     _key: string;
   }>;
@@ -353,6 +356,9 @@ export type LocaleBlockContent = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    alt?: string;
+    size?: "sm" | "md" | "lg";
+    alignment?: "left" | "center" | "right";
     _type: "image";
     _key: string;
   }>;
@@ -391,6 +397,9 @@ export type BlockContent = Array<{
   };
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
+  alt?: string;
+  size?: "sm" | "md" | "lg";
+  alignment?: "left" | "center" | "right";
   _type: "image";
   _key: string;
 }>;

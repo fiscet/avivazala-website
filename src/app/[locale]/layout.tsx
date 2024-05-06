@@ -35,7 +35,7 @@ export default async function RootLayout({
   return (
     <html lang={params.locale} data-theme="nord">
       <body className={baseFont.className}>
-        <div className="container h-lvh mx-auto bg-white">
+        <div className="container h-full min-h-lvh mx-auto bg-white">
           <Header locale={locale} />
           <ContentWrapper>{children}</ContentWrapper>
         </div>

@@ -3,6 +3,7 @@ import {
   type PortableTextComponents,
   type PortableTextBlock,
 } from 'next-sanity';
+import SanityImage from './SanityImage';
 
 export default function SanityContent({
   className,
@@ -13,12 +14,7 @@ export default function SanityContent({
 }) {
   const components: PortableTextComponents = {
     block: {
-      h5: ({ children }) => (
-        <h5 className="mb-2 text-sm font-semibold">{children}</h5>
-      ),
-      h6: ({ children }) => (
-        <h6 className="mb-1 text-xs font-semibold">{children}</h6>
-      ),
+      h4: ({ children }) => <h4 className="mb-2 font-semibold">{children}</h4>,
     },
     marks: {
       link: ({ children, value }) => {
@@ -28,6 +24,9 @@ export default function SanityContent({
           </a>
         );
       },
+    },
+    types: {
+      image: (props) => <SanityImage {...props} />,
     },
   };
 

@@ -32,10 +32,14 @@
       "@context/*": [
         "context/*"
       ],
+      "@sanityLib/*": [
+        "sanityConf/lib/*"
+      ],
       "import/*": [
         "./src/*"
       ],
-    }
+    },
+    "target": "ES2017"
   },
   "include": [
     "next-env.d.ts",

@@ -4,7 +4,7 @@ import {
   getImageDimensions,
   type SanityImageSource,
 } from '@sanity/asset-utils';
-import { client } from '@lib/sanity/client';
+import { client } from '@sanityLib/client';
 import {
   IMAGE_ALIGNMENTS,
   IMAGE_SIZES,

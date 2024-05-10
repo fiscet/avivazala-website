@@ -10,6 +10,10 @@ export const localeNames: Record<Locale, string> = {
 };
 export const defaultLocale = locales[0];
 
+export const supportedLanguages = [
+  { id: 'hu', title: localeNames['hu'], isDefault: true },
+  { id: 'en', title: localeNames['en'] }
+];
 
 export default getRequestConfig(async ({ locale }) => {
   if (!locales.includes(locale as Locale)) notFound();

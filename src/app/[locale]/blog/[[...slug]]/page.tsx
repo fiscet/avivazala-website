@@ -1,11 +1,12 @@
-import Image from 'next/image';
 import { PortableTextBlock } from 'next-sanity';
 import { Locale } from '@lib/i18n';
+import type { Metadata } from 'next';
 import { getTranslations, getLocale } from 'next-intl/server';
 import SanityContent from '@components/SanityContent';
-import { getPageSlugs, getSinglePage } from '@sanityLib/fetchers';
+import { getPageSlugs, getPostSlugs, getPosts } from '@sanityLib/fetchers';
 import { Slug } from 'types/sanity.types';
-import type { Metadata } from 'next';
+import Posts from '@components/Posts';
+import { slugPerType } from '@lib/config';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,19 +15,21 @@ export const metadata: Metadata = {
 };
 
 export async function generateStaticParams() {
-  const allSlugs = await getPageSlugs();
+  const allSlugs = await getPostSlugs();
 
   const res = allSlugs!.flatMap((slugItem: { slug: { [s: string]: unknown; } | ArrayLike<unknown>; }) => {
     const fieldArray = Object.entries(slugItem.slug);
 
     const localizedSlugs = fieldArray.filter((item) => item[0] !== '_type');
 
+    const slugTrunk = slugPerType.get('post');
+
     return localizedSlugs.map((field) => {
       if (field[0] !== '_type') {
         const slug =
           (field[1] as Slug).current === '/' ? '' : (field[1] as Slug).current;
 
-        return `/${field[0]}/${slug}`;
+        return `/${field[0]}/${slugTrunk}/${slug}`;
       }
     });
   });
@@ -34,37 +37,25 @@ export async function generateStaticParams() {
   return res;
 }
 
-export default async function Home({
+export default async function BlogPage({
   params,
 }: {
   params: { slug?: string[] };
 }) {
   const t = await getTranslations('Home');
   const locale = (await getLocale()) as Locale;
-  const slug = params?.slug ?? ['/'];
+  const slug = params?.slug;
 
-  const pageData = await getSinglePage(locale, slug[0]);
+  const posts = await getPosts()
 
-  return (
+  return (slug ?
     <main>
-      {pageData && pageData.pageImage.url && (
-        <div className="flex justify-center">
-          <Image
-            src={pageData.pageImage.url}
-            width={500}
-            height={300}
-            loading="lazy"
-            alt={'Page main image'}
-            style={{ width: '100%' }}
-          />
-        </div>
-      )}
-      {pageData && pageData.body && (
-        <SanityContent
-          className="mx-auto max-w-2xl"
-          value={pageData.body[locale] as PortableTextBlock[]}
-        />
-      )}
+      Blog Page {t('hello')}: {locale} | {params.slug?.join(', ')}
+      {/* <SanityContent
+        className="mx-auto max-w-2xl"
+        value={post.content as PortableTextBlock[]}
+      /> */}
     </main>
+    : <Posts posts={posts!} curLocale={'hu'} />
   );
 }

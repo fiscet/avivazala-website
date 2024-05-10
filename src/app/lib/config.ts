@@ -23,5 +23,5 @@ classSizes.set('orig', IMAGE_MAX_W_ORIG_CLASS);
 /** URL */
 export const slugPerType = new Map<string, string>([
   ['page', ''],
-  ['post', 'blog/'],
+  ['post', 'blog'],
 ]);

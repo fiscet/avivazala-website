@@ -3,7 +3,7 @@ import { PortableTextBlock } from 'next-sanity';
 import { Locale } from '@lib/i18n';
 import { getTranslations, getLocale } from 'next-intl/server';
 import SanityContent from '@components/SanityContent';
-import { getPageSlugs, getSinglePage } from '@sanityLib/fetchers';
+import { getPageSlugs, getPage } from '@sanityLib/fetchers';
 import { Slug } from 'types/sanity.types';
 import type { Metadata } from 'next';
 
@@ -26,7 +26,7 @@ export async function generateStaticParams() {
         const slug =
           (field[1] as Slug).current === '/' ? '' : (field[1] as Slug).current;
 
-        return `/${field[0]}/${slug}`;
+        return {slug: `/${field[0]}/${slug}`};
       }
     });
   });
@@ -43,7 +43,7 @@ export default async function Home({
   const locale = (await getLocale()) as Locale;
   const slug = params?.slug ?? ['/'];
 
-  const pageData = await getSinglePage(locale, slug[0]);
+  const pageData = await getPage(locale, slug[0]);
 
   return (
     <main>

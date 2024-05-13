@@ -1,26 +1,31 @@
-// ./components/PostPreview.tsx
+'use client';
 
-"use client";
+import { QueryResponseInitial, useQuery } from '@sanity/react-loader';
 
-import { POSTS_QUERY } from "sanityLib/queries";
-import { QueryResponseInitial, useQuery } from "@sanity/react-loader";
-import { SanityDocument } from "next-sanity";
+import PostsPostComponent from './PostsComponent';
+import { Post } from 'types/sanity.types';
+import { preparePostsQuery } from '@sanityLib/queries';
+import { Locale } from '@lib/i18n';
 
-import Posts from "@/components/Posts";
+export type PostsPreviewProps = {
+  locale: Locale;
+  postsInitial: QueryResponseInitial<Post[]>;
+};
 
 export default function PostsPreview({
-  initial,
-}: {
-  initial: QueryResponseInitial<SanityDocument[]>;
-}) {
-  const { data } = useQuery<SanityDocument[] | null>(
-    POSTS_QUERY,
-    {},
-    { initial }
+  locale,
+  postsInitial,
+}: PostsPreviewProps) {
+  const { data } = useQuery<Post[]>(
+    preparePostsQuery(locale),
+    { locale },
+    {
+      initial: postsInitial,
+    },
   );
 
   return data ? (
-    <Posts posts={data} />
+    <PostsPostComponent locale={locale} posts={data} />
   ) : (
     <div className="bg-red-100">No posts found</div>
   );

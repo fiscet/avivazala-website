@@ -1,15 +1,24 @@
-import { Locale } from "@lib/i18n";
-import { getPost } from "@sanityLib/fetchers";
-import Post from "./Post";
+import { Locale } from '@lib/i18n';
+import { loadPost } from '@sanityLib/fetchers';
+import PostComponent from './PostComponent';
+import PostPreview from './PostPreview';
 
-export type PostContainerProps = {
-  locale: Locale
-  slug: string
-}
+export type PostsContainerProps = {
+  locale: Locale;
+  slug: string;
+  isDraftMode: boolean;
+};
 
-export default async function PostContainer({ locale, slug }: PostContainerProps) {
+export default async function PostsContainer({
+  locale,
+  slug,
+  isDraftMode = false,
+}: PostsContainerProps) {
+  const postInitial = await loadPost(locale, slug, isDraftMode);
 
-  const post = await getPost(locale, slug);
-
-  <Post post={post!} />
+  return isDraftMode ? (
+    <PostPreview locale={locale} postInitial={postInitial} />
+  ) : (
+    <PostComponent post={postInitial.data} />
+  );
 }

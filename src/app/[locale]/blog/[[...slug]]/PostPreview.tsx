@@ -1,34 +1,27 @@
-// ./components/PostPreview.tsx
+'use client';
 
-"use client";
-
-import { preparePostQuery } from "@sanityLib/queries";
-import { QueryResponseInitial, useQuery } from "@sanity/react-loader";
-import { QueryParams, SanityDocument } from "next-sanity";
-
-import Post from "./Post";
-import { Locale } from "@lib/i18n";
+import { QueryResponseInitial, useQuery } from '@sanity/react-loader';
+import { Post } from 'types/sanity.types';
+import PostComponent from './PostComponent';
+import { Locale } from '@lib/i18n';
+import { preparePostQuery } from '@sanityLib/queries';
 
 export type PostPreviewProps = {
-  locale: Locale
-  slug: string
-}
+  locale: Locale;
+  postInitial: QueryResponseInitial<Post>;
+};
 
-export default function PostPreview({
-  initial,
-  params
-}: {
-  initial: QueryResponseInitial<SanityDocument>;
-  params: QueryParams
-}) {
-  const { data } = useQuery<SanityDocument | null>(
-    POST_QUERY,
-    params,
-    { initial }
+export default function PostPreview({ locale, postInitial }: PostPreviewProps) {
+  const { data } = useQuery<Post>(
+    preparePostQuery(locale),
+    { locale },
+    {
+      initial: postInitial,
+    },
   );
 
   return data ? (
-    <Post post={data} />
+    <PostComponent post={data} />
   ) : (
     <div className="bg-red-100">Post not found</div>
   );

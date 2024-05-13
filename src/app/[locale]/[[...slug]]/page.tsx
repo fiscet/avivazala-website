@@ -6,6 +6,7 @@ import SanityContent from '@components/SanityContent';
 import { getPageSlugs, getPage } from '@sanityLib/fetchers';
 import { Slug } from 'types/sanity.types';
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,20 +17,24 @@ export const metadata: Metadata = {
 export async function generateStaticParams() {
   const allSlugs = await getPageSlugs();
 
-  const res = allSlugs!.flatMap((slugItem: { slug: { [s: string]: unknown; } | ArrayLike<unknown>; }) => {
-    const fieldArray = Object.entries(slugItem.slug);
+  const res = allSlugs!.flatMap(
+    (slugItem: { slug: { [s: string]: unknown } | ArrayLike<unknown> }) => {
+      const fieldArray = Object.entries(slugItem.slug);
 
-    const localizedSlugs = fieldArray.filter((item) => item[0] !== '_type');
+      const localizedSlugs = fieldArray.filter((item) => item[0] !== '_type');
 
-    return localizedSlugs.map((field) => {
-      if (field[0] !== '_type') {
-        const slug =
-          (field[1] as Slug).current === '/' ? '' : (field[1] as Slug).current;
+      return localizedSlugs.map((field, i) => {
+        if (field[0] !== '_type') {
+          const slug =
+            (field[1] as Slug).current === '/'
+              ? ''
+              : (field[1] as Slug).current;
 
-        return {slug: `/${field[0]}/${slug}`};
-      }
-    });
-  });
+          return { slug: [field[0], slug] };
+        }
+      });
+    },
+  );
 
   return res;
 }
@@ -47,24 +52,26 @@ export default async function Home({
 
   return (
     <main>
-      {pageData && pageData.pageImage.url && (
-        <div className="flex justify-center">
-          <Image
-            src={pageData.pageImage.url}
-            width={500}
-            height={300}
-            loading="lazy"
-            alt={'Page main image'}
-            style={{ width: '100%' }}
+      <Suspense fallback={<p>Loading...</p>}>
+        {pageData && pageData.pageImage.url && (
+          <div className="flex justify-center">
+            <Image
+              src={pageData.pageImage.url}
+              width={500}
+              height={300}
+              loading="lazy"
+              alt={'Page main image'}
+              style={{ width: '100%' }}
+            />
+          </div>
+        )}
+        {pageData && pageData.body && (
+          <SanityContent
+            className="mx-auto max-w-2xl"
+            value={pageData.body[locale] as PortableTextBlock[]}
           />
-        </div>
-      )}
-      {pageData && pageData.body && (
-        <SanityContent
-          className="mx-auto max-w-2xl"
-          value={pageData.body[locale] as PortableTextBlock[]}
-        />
-      )}
+        )}
+      </Suspense>
     </main>
   );
 }

@@ -54,9 +54,11 @@ export class SanityMenuBuilder {
 
       const page = pages.find(item => { return item._id === id; });
 
-      const slugTrunk = slugPerType.get(page!._type!) ?? '';
+      let slugTrunk = slugPerType.get(page!._type!);
 
-      linkTo = `/${this.locale}/${slugTrunk}${this.getLocalizedField(page?.slug as LocaleSlug, this.locale, true)}`;
+      slugTrunk = slugTrunk ? `${slugTrunk}/` : '';
+
+      linkTo = `/${slugTrunk}${this.getLocalizedField(page?.slug as LocaleSlug, this.locale, true)}`;
     }
 
     return {

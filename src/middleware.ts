@@ -6,7 +6,7 @@ const middleware = createMiddleware({
   locales,
 
   // Default locale if no match
-  defaultLocale,
+  defaultLocale: 'hu',
 
   localePrefix: 'always',
   localeDetection: false
@@ -16,5 +16,5 @@ export default middleware;
 
 export const config = {
   // Match only internationalized pathnames
-  matcher: ['/', '/(hu|en)/:page*']
+  matcher: ['/', '/(hu|en)/:page*', '/(hu|en)/blog/:page*']
 };

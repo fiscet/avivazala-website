@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@lib/i18n';
 import { ReactNode } from 'react';
 
 export type MainMenuItemProps = {

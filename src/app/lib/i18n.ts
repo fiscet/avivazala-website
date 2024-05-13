@@ -8,7 +8,7 @@ export const localeNames: Record<Locale, string> = {
   'hu': 'Magyar',
   'en': 'English'
 };
-export const defaultLocale = locales[0];
+export const defaultLocale = 'hu';
 
 export const supportedLanguages = [
   { id: 'hu', title: localeNames['hu'], isDefault: true },

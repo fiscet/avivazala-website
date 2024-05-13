@@ -1,12 +1,12 @@
 import { draftMode } from 'next/headers';
 import { Locale } from '@lib/i18n';
-import type { Metadata } from 'next';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { getPostSlugs } from '@sanityLib/fetchers';
 import { Slug } from 'types/sanity.types';
 import { slugPerType } from '@lib/config';
-import { Suspense } from 'react';
+import type { Metadata } from 'next';
 import PostsContainer from './PostsContainer';
+import SuspenseLoading from '@components/SuspenseLoading';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -53,19 +53,19 @@ export default async function BlogPage({
 
   return slug ? (
     <main>
-      <Suspense fallback={<p>Loading...</p>}>
+      <SuspenseLoading>
         Blog Page {t('hello')}: {locale} | {params.slug?.join(', ')}
         {/* <SanityContent
         className="mx-auto max-w-2xl"
         value={post.content as PortableTextBlock[]}
       /> */}
-      </Suspense>
+      </SuspenseLoading>
     </main>
   ) : (
     <main>
-      <Suspense fallback={<p>Loading...</p>}>
+      <SuspenseLoading>
         <PostsContainer locale={locale} isDraftMode={isDraftMode} />
-      </Suspense>
+      </SuspenseLoading>
     </main>
   );
 }

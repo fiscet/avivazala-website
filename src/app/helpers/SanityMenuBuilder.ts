@@ -55,7 +55,6 @@ export class SanityMenuBuilder {
       const page = pages.find(item => { return item._id === id; });
 
       let slugTrunk = slugPerType.get(page!._type!);
-
       slugTrunk = slugTrunk ? `${slugTrunk}/` : '';
 
       linkTo = `/${slugTrunk}${this.getLocalizedField(page?.slug as LocaleSlug, this.locale, true)}`;

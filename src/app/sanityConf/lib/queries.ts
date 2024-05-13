@@ -35,8 +35,11 @@ export const postSlugsQuery = groq`*[_type == "post"] {
   slug
 }`;
 
-export const preparePostsQuery = (locale: Locale) => `*[_type == "post" && slug[$locale].current == $slug][0] {
+export const preparePostsQuery = (locale: Locale) => `*[_type == "post"] {
+  _id,
+  _type,
   title{${locale}},
+  slug{${locale}},
   "pageImage": {
     "url": mainImage.asset->url,
     "dimensions": mainImage.asset->metadata.dimensions

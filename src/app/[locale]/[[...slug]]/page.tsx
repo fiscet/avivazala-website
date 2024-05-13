@@ -6,7 +6,8 @@ import SanityContent from '@components/SanityContent';
 import { getPageSlugs, getPage } from '@sanityLib/fetchers';
 import { Slug } from 'types/sanity.types';
 import type { Metadata } from 'next';
-import { Suspense } from 'react';
+import SuspenseLoading from '@components/SuspenseLoading';
+import Loading from '@components/Loading';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -52,7 +53,7 @@ export default async function Home({
 
   return (
     <main>
-      <Suspense fallback={<p>Loading...</p>}>
+      <SuspenseLoading>
         {pageData && pageData.pageImage.url && (
           <div className="flex justify-center">
             <Image
@@ -71,7 +72,7 @@ export default async function Home({
             value={pageData.body[locale] as PortableTextBlock[]}
           />
         )}
-      </Suspense>
+      </SuspenseLoading>
     </main>
   );
 }

@@ -10,7 +10,7 @@ import { structureTool } from 'sanity/structure';
 import { apiVersion, dataset, projectId, sanityStudioTitle } from './src/app/sanityConf/env';
 import { schemaTypes } from './src/app/sanityConf/schemaTypes';
 import { structure } from './src/app/sanityConf/structure';
-import { presentationTool } from 'sanity/presentation';
+import { defineDocuments, presentationTool } from 'sanity/presentation';
 import { locate } from 'sanityConf/locate';
 
 export default defineConfig({
@@ -26,7 +26,19 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
     presentationTool({
-      locate,
+      resolve: {
+        locations: locate,
+        mainDocuments: defineDocuments([
+          {
+            route: '/hu/blog/',
+            filter: `_type == "post"`,
+          },
+          {
+            route: '/hu/blog/:slug',
+            filter: `_type == "post" && slug.current == $slug`,
+          },
+        ]),
+      },
       previewUrl: {
         draftMode: {
           enable: '/api/draft',

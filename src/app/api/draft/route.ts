@@ -8,7 +8,7 @@ import { token } from "@sanityLib/token";
 const clientWithToken = client.withConfig({ token });
 
 export async function GET(request: Request) {
-  const { isValid, redirectTo = "/hu/blog/" } = await validatePreviewUrl(
+  const { isValid, redirectTo = "/" } = await validatePreviewUrl(
     clientWithToken,
     request.url
   );
@@ -19,6 +19,5 @@ export async function GET(request: Request) {
 
   draftMode().enable();
 
-  redirect('/hu/blog/');
-  // redirect(redirectTo);
+  redirect(redirectTo);
 }

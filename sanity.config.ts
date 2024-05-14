@@ -10,7 +10,7 @@ import { structureTool } from 'sanity/structure';
 import { apiVersion, dataset, projectId, sanityStudioTitle } from './src/app/sanityConf/env';
 import { schemaTypes } from './src/app/sanityConf/schemaTypes';
 import { structure } from './src/app/sanityConf/structure';
-import { defineDocuments, presentationTool } from 'sanity/presentation';
+import { presentationTool } from 'sanity/presentation';
 import { locate } from 'sanityConf/locate';
 
 export default defineConfig({
@@ -27,17 +27,7 @@ export default defineConfig({
     visionTool({ defaultApiVersion: apiVersion }),
     presentationTool({
       resolve: {
-        locations: locate,
-        mainDocuments: defineDocuments([
-          {
-            route: '/hu/blog/',
-            filter: `_type == "post"`,
-          },
-          {
-            route: '/hu/blog/:slug',
-            filter: `_type == "post" && slug.current == $slug`,
-          },
-        ]),
+        locations: locate
       },
       previewUrl: {
         draftMode: {

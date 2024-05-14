@@ -1,5 +1,3 @@
-// ./sanity/lib/store.ts
-
 import * as queryStore from "@sanity/react-loader";
 
 import { client } from "./client";

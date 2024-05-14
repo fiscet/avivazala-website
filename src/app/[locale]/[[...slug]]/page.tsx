@@ -3,7 +3,7 @@ import { PortableTextBlock } from 'next-sanity';
 import { Locale } from '@lib/i18n';
 import { getTranslations, getLocale } from 'next-intl/server';
 import SanityContent from '@components/SanityContent';
-import { getPageSlugs, getPage } from '@sanityLib/fetchers';
+import { loadPageSlugs, loadPage } from '@sanityLib/fetchers';
 import { Slug } from 'types/sanity.types';
 import type { Metadata } from 'next';
 import SuspenseLoading from '@components/SuspenseLoading';
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 export async function generateStaticParams() {
-  const allSlugs = await getPageSlugs();
+  const allSlugs = (await loadPageSlugs()).data;
 
   const res = allSlugs!.flatMap(
     (slugItem: { slug: { [s: string]: unknown } | ArrayLike<unknown> }) => {
@@ -49,7 +49,7 @@ export default async function Home({
   const locale = (await getLocale()) as Locale;
   const slug = params?.slug ?? ['/'];
 
-  const pageData = await getPage(locale, slug[0]);
+  const pageData = (await loadPage(locale, slug[0])).data;
 
   return (
     <main>

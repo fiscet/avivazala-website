@@ -1,7 +1,7 @@
 import { draftMode } from 'next/headers';
 import { Locale } from '@lib/i18n';
 import { getTranslations, getLocale } from 'next-intl/server';
-import { getPostSlugs } from '@sanityLib/fetchers';
+import { loadPostSlugs } from '@sanityLib/fetchers';
 import { Slug } from 'types/sanity.types';
 import { slugPerType } from '@lib/config';
 import type { Metadata } from 'next';
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export async function generateStaticParams() {
-  const allSlugs = await getPostSlugs();
+  const allSlugs = (await loadPostSlugs()).data;
 
   const res = allSlugs!.flatMap(
     (slugItem: { slug: { [s: string]: unknown } | ArrayLike<unknown> }) => {
@@ -53,6 +53,7 @@ export default async function BlogPage({
 
   return slug ? (
     <main>
+      <p>isDraftMode: {isDraftMode ? 'ok' : '---'}</p>
       <SuspenseLoading>
         Blog Page {t('hello')}: {locale} | {params.slug?.join(', ')}
         {/* <SanityContent
@@ -63,6 +64,7 @@ export default async function BlogPage({
     </main>
   ) : (
     <main>
+      <p>isDraftMode: {isDraftMode ? 'ok' : '---'}</p>
       <SuspenseLoading>
         <PostsContainer locale={locale} isDraftMode={isDraftMode} />
       </SuspenseLoading>

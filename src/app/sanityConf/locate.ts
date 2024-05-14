@@ -3,13 +3,12 @@ import { map } from "rxjs";
 
 // Pass 'context' as the second argument
 export const locate: DocumentLocationResolver = (params, context) => {
-  console.log('params:', params);
-  console.log('context:', context);
   // Set up locations for post documents
   if (params.type === "post") {
     // Subscribe to the latest slug and title
     const doc$ = context.documentStore.listenQuery(
-      `*[_type == "post"]`,
+      // `*[_type == "post"]`,
+      `*[_id == $id][0]{slug,title}`,
       params,
       { perspective: "previewDrafts" } // returns a draft article if it exists
     );

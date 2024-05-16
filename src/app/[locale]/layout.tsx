@@ -1,10 +1,12 @@
 import React, { ReactNode } from 'react';
 import { Metadata } from 'next';
+import { draftMode } from "next/headers";
 import { Ubuntu } from 'next/font/google';
 import 'globals.css';
 import Header from '@components/HeaderComponent';
 import ContentWrapper from '@components/ContentWrapperComponent';
 import { Locale, defaultLocale } from '@lib/i18n';
+import LiveVisualEditing from '@components/LiveVisualEditing';
 
 export const metadata: Metadata = {
   icons: {
@@ -38,6 +40,7 @@ export default async function RootLayout({
         <div className="container h-full min-h-lvh mx-auto bg-white">
           <Header locale={locale} />
           <ContentWrapper>{children}</ContentWrapper>
+          {draftMode().isEnabled && <LiveVisualEditing />}
         </div>
       </body>
     </html>

@@ -32,8 +32,16 @@ export default defineType({
       name: 'body',
       title: 'Body',
       type: 'array',
-      of: [{ type: 'localeBlockContent' }],
+      of: [{ type: 'localeBlockContent' }]
     }),
+    defineField({
+      title: 'List other documents',
+      name: 'listOf',
+      description: `Choose on of the following document type`,
+      type: 'array',
+      of: [{ type: 'string', options: { list: [{ title: 'Post list', value: 'post' }, { title: 'Post categories', value: 'postCategory' }] } }],
+      validation: rule => rule.max(1)
+    })
   ],
 
   preview: {

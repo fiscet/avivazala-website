@@ -1,5 +1,5 @@
-import { defineType, defineField } from 'sanity'
-import { supportedLanguages } from '@lib/i18n';
+import { defineType, defineField } from 'sanity';
+import { defaultLocale, supportedLanguages } from '@lib/i18n';
 
 const fields = supportedLanguages.map((lang) => (
   defineField({
@@ -22,4 +22,21 @@ export default defineType({
     }
   ],
   fields,
-})
+
+  preview: {
+    select: {
+      blocks: defaultLocale
+    },
+    prepare(value) {
+      const block = (value.blocks || []).find((block: { _type: string; }) => block._type === 'block');
+      return {
+        title: block
+          ? block.children
+            .filter((child: { _type: string; }) => child._type === 'span')
+            .map((span: { text: any; }) => span.text)
+            .join('')
+          : 'No title'
+      };
+    }
+  }
+});

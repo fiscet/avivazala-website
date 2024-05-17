@@ -1,13 +1,11 @@
-import { WebsiteMenu } from 'types/local.types';
+import { WebsiteMenu } from 'types/extended-sanity.types';
 import MainMenuItem from './MainMenuItem';
 
-export type DesktopMenuComponentProps = {
+export type DesktopMenuProps = {
   menu: WebsiteMenu;
 };
 
-export default function DesktopMenuComponent({
-  menu,
-}: DesktopMenuComponentProps) {
+export default function DesktopMenu({ menu }: DesktopMenuProps) {
   return (
     <ul className="menu menu-horizontal px-1">
       {menu.items.map((menuItem) => {

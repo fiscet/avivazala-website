@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react';
 import { Metadata } from 'next';
-import { draftMode } from "next/headers";
+import { draftMode } from 'next/headers';
 import { Ubuntu } from 'next/font/google';
 import 'globals.css';
-import Header from '@components/HeaderComponent';
-import ContentWrapper from '@components/ContentWrapperComponent';
+import Header from '@components/Header';
+import ContentWrapper from '@components/ContentWrapper';
 import { Locale, defaultLocale } from '@lib/i18n';
 import LiveVisualEditing from '@components/LiveVisualEditing';
 

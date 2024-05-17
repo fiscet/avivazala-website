@@ -12,22 +12,23 @@ export const locate: DocumentLocationResolver = (params, context) => {
       params,
       { perspective: "previewDrafts" } // returns a draft article if it exists
     );
+
     // Return a streaming list of locations
     return doc$.pipe(
       map((doc) => {
         // If the document doesn't exist or have a slug, return null
-        if (!doc || !doc.slug?.current) {
+        if (!doc || !doc.slug?.hu.current) {
           return null;
         }
         return {
           locations: [
             {
-              title: doc.title || "Untitled",
-              href: `/hu/blog/${doc.slug.current}`,
+              title: doc.title.hu || "Untitled",
+              href: `/hu/blog/${doc.slug.hu.scurrent}`,
             },
             {
               title: "Posts",
-              href: "/hu/blog/",
+              href: "/hu/blog",
             },
           ],
         };

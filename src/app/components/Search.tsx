@@ -1,3 +1,3 @@
-export default function SearchComponent() {
-  return (<div>Search component</div>)
+export default function Search() {
+  return <div>Search component</div>;
 }

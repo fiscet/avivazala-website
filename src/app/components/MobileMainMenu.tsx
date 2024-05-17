@@ -1,13 +1,11 @@
-import { WebsiteMenu } from 'types/local.types';
+import { WebsiteMenu } from 'types/extended-sanity.types';
 import MainMenuItem from './MainMenuItem';
 
-export type MobileMenuComponentProps = {
+export type MobileMenuProps = {
   menu: WebsiteMenu;
 };
 
-export default function MobileMenuComponent({
-  menu,
-}: MobileMenuComponentProps) {
+export default function MobileMenu({ menu }: MobileMenuProps) {
   return (
     <ul
       tabIndex={0}

@@ -2,9 +2,9 @@
 
 import { QueryResponseInitial, useQuery } from '@sanity/react-loader';
 import { Post } from 'types/sanity.types';
-import PostComponent from './PostComponent';
+import PostComponent from './Post.component';
 import { Locale } from '@lib/i18n';
-import { preparePostQuery } from '@sanityLib/queries';
+import { preparePostQuery } from 'sanity-conf/lib/queries';
 
 export type PostPreviewProps = {
   locale: Locale;

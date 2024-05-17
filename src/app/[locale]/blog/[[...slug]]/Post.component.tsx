@@ -3,7 +3,7 @@ import { PortableText } from '@portabletext/react';
 import imageUrlBuilder from '@sanity/image-url';
 import { SanityDocument } from 'next-sanity';
 
-import { dataset, projectId } from 'sanityConf/env';
+import { dataset, projectId } from 'sanity-conf/env';
 
 const builder = imageUrlBuilder({ projectId, dataset });
 

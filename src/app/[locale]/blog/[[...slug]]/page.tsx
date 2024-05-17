@@ -1,11 +1,11 @@
 import { draftMode } from 'next/headers';
 import { Locale } from '@lib/i18n';
 import { getTranslations, getLocale } from 'next-intl/server';
-import { loadPostSlugs } from '@sanityLib/fetchers';
+import { loadPostSlugs } from 'sanity-conf/lib/fetchers';
 import { Slug } from 'types/sanity.types';
-import { slugPerType } from '@lib/config';
+import { slugPerType } from '@lib/website.config';
 import type { Metadata } from 'next';
-import PostsContainer from './PostsContainer';
+import PostsContainer from './Posts.container';
 import SuspenseLoading from '@components/SuspenseLoading';
 
 export const metadata: Metadata = {

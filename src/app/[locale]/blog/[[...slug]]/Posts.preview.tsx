@@ -2,9 +2,9 @@
 
 import { QueryResponseInitial, useQuery } from '@sanity/react-loader';
 
-import PostsPostComponent from './PostsComponent';
+import PostsPostComponent from './Posts.component';
 import { Post } from 'types/sanity.types';
-import { preparePostsQuery } from '@sanityLib/queries';
+import { preparePostsQuery } from 'sanity-conf/lib/queries';
 import { Locale } from '@lib/i18n';
 
 export type PostsPreviewProps = {

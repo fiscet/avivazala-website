@@ -1,12 +1,12 @@
 import { defineField, defineType } from 'sanity';
 import { defaultLocale } from '@lib/i18n';;
-import { GrDocument } from "react-icons/gr";
+import { GrDocumentWord } from "react-icons/gr";
 
 export default defineType({
-  title: 'Page',
-  name: 'page',
+  title: 'Post',
+  name: 'post',
   type: 'document',
-  icon: GrDocument,
+  icon: GrDocumentWord,
   fields: [
     defineField({
       name: 'title',
@@ -21,6 +21,12 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'reference',
+      to: { type: 'author' },
+    }),
+    defineField({
       name: 'mainImage',
       title: 'Main image',
       type: 'image',
@@ -29,16 +35,33 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'postCategory' } }],
+    }),
+    defineField({
+      name: 'publishedAt',
+      title: 'Published at',
+      type: 'datetime',
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
-      type: 'localeBlockContent',
+      type: 'array',
+      of: [{ type: 'localeBlockContent' }],
     }),
   ],
 
   preview: {
     select: {
       title: `title.${defaultLocale}`,
+      author: 'author.name',
       media: 'mainImage',
-    }
+    },
+    prepare(selection) {
+      const { author } = selection;
+      return { ...selection, subtitle: author && `by ${author}` };
+    },
   },
 });

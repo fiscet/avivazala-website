@@ -1,7 +1,7 @@
 import { Locale } from '@lib/i18n';
-import { loadPost } from '@sanityLib/fetchers';
-import PostComponent from './PostComponent';
-import PostPreview from './PostPreview';
+import { loadPost } from 'sanity-conf/lib/fetchers';
+import PostComponent from './Post.component';
+import PostPreview from './Post.preview';
 
 export type PostsContainerProps = {
   locale: Locale;

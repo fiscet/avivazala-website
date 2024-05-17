@@ -3,7 +3,7 @@ import { PortableTextBlock } from 'next-sanity';
 import { Locale } from '@lib/i18n';
 import { getTranslations, getLocale } from 'next-intl/server';
 import SanityContent from '@components/SanityContent';
-import { loadPageSlugs, loadPage } from '@sanityLib/fetchers';
+import { loadPageSlugs, loadPage } from 'sanity-conf/lib/fetchers';
 import { Slug } from 'types/sanity.types';
 import type { Metadata } from 'next';
 import SuspenseLoading from '@components/SuspenseLoading';

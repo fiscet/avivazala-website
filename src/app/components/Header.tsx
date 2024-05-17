@@ -1,15 +1,15 @@
 import React from 'react';
 import Image from 'next/image';
 import Search from './Search';
-import MainNavbarMobile from './MobileMainNavbarComponent';
-import MainNavbarDesktop from './DesktopMainNavbarComponent';
-import MobileMenu from './MobileMainMenuComponent';
-import DesktopMainMenu from './DesktopMainMenuComponent';
+import MainNavbarMobile from './MobileMainNavbar';
+import MainNavbarDesktop from './DesktopMainNavbar';
+import MobileMenu from './MobileMainMenu';
+import DesktopMainMenu from './DesktopMainMenu';
 import { SanityMenuBuilder } from 'helpers/SanityMenuBuilder';
 import LangSwitcher from './LangSwitcher';
 import { Locale } from '@lib/i18n';
 
-export default async function HeaderComponent({ locale }: { locale: Locale }) {
+export default async function Header({ locale }: { locale: Locale }) {
   const menuBuilder = new SanityMenuBuilder(locale);
 
   const menu = await menuBuilder.getMenuData();

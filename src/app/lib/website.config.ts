@@ -1,9 +1,9 @@
 /** IMAGES */
 export const IMAGE_SIZES = ['sm', 'md', 'lg', 'orig'] as const;
 export const IMAGE_ALIGNMENTS = ['left', 'center', 'right'] as const;
-export const IMAGE_ALIGN_LEFT_CLASS = 'justify-start';
-export const IMAGE_ALIGN_CENTER_CLASS = 'justify-center';
-export const IMAGE_ALIGN_RIGHT_CLASS = 'justify-end';
+export const IMAGE_ALIGN_LEFT_CLASS = 'float-left';
+export const IMAGE_ALIGN_CENTER_CLASS = 'mx-auto';
+export const IMAGE_ALIGN_RIGHT_CLASS = 'float-right';
 export const IMAGE_MAX_W_SM_CLASS = 'max-w-40';
 export const IMAGE_MAX_W_MD_CLASS = 'max-w-md';
 export const IMAGE_MAX_W_LG_CLASS = 'max-w-xl';

@@ -1,7 +1,7 @@
 'use server';
 import { mainMenuQuery, pageSlugsQuery, postSlugsQuery, preparePostsQuery, preparePageQuery, preparePostQuery } from "./queries";
 import { LocaleSlug, Post } from "types/sanity.types";
-import { FullNavigation, WebPage } from "types/local.types";
+import { FullNavigation, WebPage } from "types/extended-sanity.types";
 import { Locale } from "@lib/i18n";
 import { loadQuery } from "./store";
 

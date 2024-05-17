@@ -1,14 +1,12 @@
 import { ReactNode } from 'react';
-import ContentWrapper from './ContentWrapperComponent';
-import MobileMenuButton from './MobileMenuButtonComponent';
+import ContentWrapper from './ContentWrapper';
+import MobileMenuButton from './MobileMenuButton';
 
-export type MobileMainNavbarComponentProps = {
+export type MobileMainNavbarProps = {
   children: ReactNode;
 };
 
-export default function MobileMainNavbarComponent({
-  children,
-}: MobileMainNavbarComponentProps) {
+export default function MobileMainNavbar({ children }: MobileMainNavbarProps) {
   return (
     <div className="navbar m-0 p-0 lg:hidden">
       <div className="navbar-start">

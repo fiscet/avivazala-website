@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen-types": "sanity schema extract --path ./src/app/types/schema.json && sanity typegen generate",
+    "gen-types": "sanity schema extract --path ./src/app/types/sanity.schema.json && sanity typegen generate",
     "prettier": "prettier --write ."
   },
   "dependencies": {

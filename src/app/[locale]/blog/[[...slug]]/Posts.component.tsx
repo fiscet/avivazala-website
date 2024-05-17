@@ -1,4 +1,4 @@
-import { slugPerType } from '@lib/config';
+import { slugPerType } from '@lib/website.config';
 import { Link, Locale } from '@lib/i18n';
 import { Post } from 'types/sanity.types';
 

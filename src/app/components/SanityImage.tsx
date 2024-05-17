@@ -4,13 +4,13 @@ import {
   getImageDimensions,
   type SanityImageSource,
 } from '@sanity/asset-utils';
-import { client } from '@sanityLib/client';
+import { client } from 'sanity-conf/lib/client';
 import {
   IMAGE_ALIGNMENTS,
   IMAGE_SIZES,
   classAlignments,
   classSizes,
-} from '@lib/config';
+} from '@lib/website.config';
 
 type SanityImageProps = {
   value: SanityImageSource & {
@@ -24,16 +24,14 @@ export default function SanityImage({ value }: SanityImageProps) {
   const { width, height } = getImageDimensions(value);
 
   return (
-    <div className={`flex ${classAlignments.get(value.alignment)}`}>
-      <Image
-        src={urlBuilder(client).image(value).fit('max').auto('format').url()}
-        width={width}
-        height={height}
-        alt={' '}
-        loading="lazy"
-        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-        className={classSizes.get(value.size)}
-      />
-    </div>
+    <Image
+      src={urlBuilder(client).image(value).fit('max').auto('format').url()}
+      width={width}
+      height={height}
+      alt={' '}
+      loading="lazy"
+      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+      className={`${classSizes.get(value.size)} ${classAlignments.get(value.alignment)}`}
+    />
   );
 }

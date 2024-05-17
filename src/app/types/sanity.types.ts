@@ -156,8 +156,8 @@ export type Post = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: LocaleString;
-  slug: LocaleSlug;
+  title?: LocaleString;
+  slug?: LocaleSlug;
   author?: {
     _ref: string;
     _type: "reference";
@@ -462,7 +462,7 @@ export type SanityImageMetadata = {
 };
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
-// Source: ./src/app/sanityConf/lib/queries.ts
+// Source: ./src/app/sanity-conf/lib/queries.ts
 // Variable: mainMenuQuery
 // Query: *[_type == "navigation" && navId.current == "main-menu"][0] {   items,  "pages": items[].navigationItemLink.internalLink->{    _id,    _type,    slug  },  "subpages": items[].navigationItemLink.submenu[].navigationItemLink.internalLink->{    _id,    _type,    slug  }}
 export type MainMenuQueryResult = {
@@ -489,51 +489,14 @@ export type MainMenuQueryResult = {
   } | null> | null;
 } | null;
 // Variable: pageSlugsQuery
-// Query: *[_type == "page" && defined(slug)] {  slug}
+// Query: *[_type == "page"] {  slug}
 export type PageSlugsQueryResult = Array<{
   slug: LocaleSlug | null;
 }>;
 // Variable: postSlugsQuery
-// Query: *[_type == "post" && defined(slug)] {  slug}
+// Query: *[_type == "post"] {  slug}
 export type PostSlugsQueryResult = Array<{
   slug: LocaleSlug | null;
-}>;
-// Variable: postsQuery
-// Query: *[_type == "post" && defined(slug)]
-export type PostsQueryResult = Array<{
-  _id: string;
-  _type: "post";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: LocaleString;
-  slug?: LocaleSlug;
-  author?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "author";
-  };
-  mainImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "postCategory";
-  }>;
-  publishedAt?: string;
-  body?: LocaleBlockContent;
 }>;
 // Variable: languagesAvailableQuery
 // Query: *[_type == "languagesAvailable"][0] {  languages,  langDefault}

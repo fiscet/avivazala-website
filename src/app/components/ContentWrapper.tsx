@@ -7,18 +7,17 @@ export type ContentWrapperProps = {
   children: ReactNode;
 };
 
-export default function ContentWrapperComponent({
+export default function ContentWrapper({
   children,
   x = true,
-  y = true
+  y = true,
 }: ContentWrapperProps) {
+  let classNames: string[] = [];
 
-  let classNames:string[] = [];
-
-  if(x) {
+  if (x) {
     classNames.push('px-10 lg:px-16');
   }
-  if(y) {
+  if (y) {
     classNames.push('py-5 lg:py-8');
   }
 

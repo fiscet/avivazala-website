@@ -1,6 +1,6 @@
 import { GiHamburgerMenu } from 'react-icons/gi';
 
-export default function MobileMenuButtonComponent() {
+export default function MobileMenuButton() {
   return (
     <div
       tabIndex={0}

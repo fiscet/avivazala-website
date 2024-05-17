@@ -1,6 +1,6 @@
-import { slugPerType } from "@lib/config";
-import { loadMainMenu } from "@sanityLib/fetchers";
-import { FullNavigation, LocalizedField, NavigationItemWithKey, WebsiteMenu, WebsiteMenuItem } from "types/local.types";
+import { slugPerType } from "@lib/website.config";
+import { loadMainMenu } from "sanity-conf/lib/fetchers";
+import { FullNavigation, LocalizedField, NavigationItemWithKey, WebsiteMenu, WebsiteMenuItem } from "types/extended-sanity.types";
 import { LocaleSlug, LocaleString, Page, Post } from "types/sanity.types";
 
 export class SanityMenuBuilder {

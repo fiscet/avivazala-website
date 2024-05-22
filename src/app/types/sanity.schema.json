@@ -1009,8 +1009,22 @@
       "body": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "localeBlockContent"
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "localeBlockContent"
+            }
+          }
         },
         "optional": true
       }
@@ -1388,8 +1402,42 @@
       "body": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "localeBlockContent"
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "localeBlockContent"
+            }
+          }
+        },
+        "optional": true
+      },
+      "listOf": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "post"
+              },
+              {
+                "type": "string",
+                "value": "postCategory"
+              }
+            ]
+          }
         },
         "optional": true
       }

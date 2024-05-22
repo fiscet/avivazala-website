@@ -183,7 +183,9 @@ export type Post = {
     [internalGroqTypeReferenceTo]?: "postCategory";
   }>;
   publishedAt?: string;
-  body?: LocaleBlockContent;
+  body?: Array<{
+    _key: string;
+  } & LocaleBlockContent>;
 };
 
 export type Author = {
@@ -244,7 +246,10 @@ export type Page = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  body?: LocaleBlockContent;
+  body?: Array<{
+    _key: string;
+  } & LocaleBlockContent>;
+  listOf?: Array<"post" | "postCategory">;
 };
 
 export type NavigationItem = {

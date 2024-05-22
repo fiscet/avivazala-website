@@ -66,12 +66,18 @@ export default async function Home({
             />
           </div>
         )}
-        {pageData && pageData.body && (
-          <SanityContent
-            className="mx-auto max-w-2xl"
-            value={pageData.body[locale] as PortableTextBlock[]}
-          />
-        )}
+        {pageData.body &&
+          pageData.body.map((localeBlockContent) => {
+            const content = localeBlockContent[locale];
+
+            return (
+              <SanityContent
+                key={localeBlockContent._key}
+                className="mx-auto max-w-2xl"
+                value={content as PortableTextBlock[]}
+              />
+            );
+          })}
       </SuspenseLoading>
     </main>
   );

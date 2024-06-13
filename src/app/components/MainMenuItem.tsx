@@ -12,9 +12,13 @@ export type MainMenuItemProps = {
 };
 
 const MobileItem = ({ label, linkTo, submenu }: MainMenuItemProps) => {
+  const closeMenu = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.currentTarget.blur();
+  }
+
   return (
     <>
-      <Link href={linkTo} title={label}>
+      <Link href={linkTo} title={label} onClick={closeMenu}>
         {label}
       </Link>
       {submenu && submenu.length && (

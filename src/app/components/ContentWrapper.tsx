@@ -21,5 +21,5 @@ export default function ContentWrapper({
     classNames.push('py-5 lg:py-8');
   }
 
-  return <div className={classNames.join(' ')}>{children}</div>;
+  return <div className={`flex-grow ${classNames.join(' ')}`}>{children}</div>;
 }

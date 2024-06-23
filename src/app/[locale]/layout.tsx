@@ -7,6 +7,7 @@ import Header from '@components/Header';
 import ContentWrapper from '@components/ContentWrapper';
 import { Locale, defaultLocale } from '@lib/i18n';
 import LiveVisualEditing from '@components/LiveVisualEditing';
+import Footer from '@components/Footer';
 
 export const metadata: Metadata = {
   icons: {
@@ -37,9 +38,10 @@ export default async function RootLayout({
   return (
     <html lang={params.locale} data-theme="nord">
       <body className={baseFont.className}>
-        <div className="container h-full min-h-lvh mx-auto bg-white">
+        <div className="container mx-auto bg-white flex flex-col min-h-screen">
           <Header locale={locale} />
           <ContentWrapper>{children}</ContentWrapper>
+          <Footer />
           {draftMode().isEnabled && <LiveVisualEditing />}
         </div>
       </body>

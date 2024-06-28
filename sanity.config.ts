@@ -6,7 +6,7 @@ import { apiVersion, dataset, projectId, sanityStudioTitle } from './src/app/san
 import { schemaTypes } from './src/app/sanity-conf/schema';
 import { structure } from './src/app/sanity-conf/structure';
 import { presentationTool } from 'sanity/presentation';
-import { locate } from 'sanity-conf/locate';
+import { locate } from '@sanityConf/locate';
 
 export default defineConfig({
   title: sanityStudioTitle + ' #' + process.env.NODE_ENV?.substring(0, 3),

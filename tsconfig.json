@@ -32,8 +32,11 @@
       "@context/*": [
         "context/*"
       ],
+      "@sanityConf/*": [
+        "sanity-conf/*"
+      ],
       "@sanityLib/*": [
-        "sanityConf/lib/*"
+        "sanity-conf/lib/*"
       ],
       "import/*": [
         "./src/*"

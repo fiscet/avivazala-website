@@ -35,5 +35,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# sanity
+/.sanity
+/dist
+
 # custom
 avivazala-website-github-params

@@ -21,10 +21,10 @@ export const sanityStudioTitle = assertValue(
   'Missing enviroment variable: SANITY_STUDIO_TITLE'
 );
 
-function assertValue<T>(mainValue: T | undefined, secondaryValue: T | undefined, errorMessage: string): T {
+function assertValue<T>(mainValue: T | undefined, secondaryValue: T, errorMessage: string): T {
   if (mainValue === undefined && secondaryValue === undefined) {
     throw new Error(errorMessage);
   }
-  if (mainValue) { return mainValue; }
-  if (secondaryValue) { return secondaryValue; }
+
+  return mainValue ?? secondaryValue;
 }

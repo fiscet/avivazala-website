@@ -5,12 +5,13 @@ import MainNavbarMobile from './MobileMainNavbar';
 import MainNavbarDesktop from './DesktopMainNavbar';
 import MobileMenu from './MobileMainMenu';
 import DesktopMainMenu from './DesktopMainMenu';
-import { SanityMenuBuilder } from 'helpers/SanityMenuBuilder';
 import LangSwitcher from './LangSwitcher';
+import { SanityMenuBuilder } from 'helpers/SanityMenuBuilder';
+import { loadMainMenu } from 'sanity-conf/lib/fetchers';
 import { Locale } from '@lib/i18n';
 
 export default async function Header({ locale }: { locale: Locale }) {
-  const menuBuilder = new SanityMenuBuilder(locale);
+  const menuBuilder = new SanityMenuBuilder({ locale, loadMenu: loadMainMenu });
 
   const menu = await menuBuilder.getMenuData();
 

@@ -1,19 +1,27 @@
+import { Locale } from "@lib/i18n";
 import { slugPerType } from "@lib/website.config";
-import { loadMainMenu } from "sanity-conf/lib/fetchers";
+import { QueryResponseInitial } from "@sanity/react-loader";
 import { FullNavigation, LocalizedField, NavigationItemWithKey, WebsiteMenu, WebsiteMenuItem } from "types/extended-sanity.types";
 import { LocaleSlug, LocaleString, Page, Post } from "types/sanity.types";
 
+export type SanityMenuBuilderProps = {
+  locale: Locale,
+  loadMenu: () => Promise<QueryResponseInitial<FullNavigation>>;
+};
+
 export class SanityMenuBuilder {
   private locale: string;
+  private loadMenu: () => Promise<QueryResponseInitial<FullNavigation>>;;
   private allRefPostPages?: Partial<Page | Post>[];
   private finalMenu: WebsiteMenu = { items: [] };
 
-  constructor(locale: string) {
+  constructor({ locale, loadMenu }: SanityMenuBuilderProps) {
     this.locale = locale;
+    this.loadMenu = loadMenu;
   }
 
   public async getMenuData() {
-    const sanityNavigation = (await loadMainMenu()).data;
+    const sanityNavigation = (await this.loadMenu()).data;
 
     this.allRefPostPages = [...sanityNavigation!.pages, ...sanityNavigation!.subpages];
     this.allRefPostPages = this.allRefPostPages.filter(item => item);

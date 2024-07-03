@@ -1,3 +1,5 @@
+import { unstable_setRequestLocale } from 'next-intl/server';
+import { draftMode } from 'next/headers';
 import { Locale } from '@lib/i18n';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { loadPostSlugs } from 'sanity-conf/lib/fetchers';
@@ -48,6 +50,9 @@ export default async function BlogPage({
   const t = await getTranslations('Home');
   const locale = (await getLocale()) as Locale;
   const slug = params?.slug;
+  const isDraftMode = draftMode().isEnabled;
+
+  unstable_setRequestLocale(locale);
 
   return slug ? (
     <main>
@@ -62,7 +67,7 @@ export default async function BlogPage({
   ) : (
     <main>
       <SuspenseLoading>
-        <PostsContainer locale={locale} isDraftMode={false} />
+        <PostsContainer locale={locale} isDraftMode={isDraftMode} />
       </SuspenseLoading>
     </main>
   );

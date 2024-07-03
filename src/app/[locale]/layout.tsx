@@ -1,11 +1,13 @@
 import React, { ReactNode } from 'react';
+import { unstable_setRequestLocale } from 'next-intl/server';
 import { Metadata } from 'next';
 import Script from 'next/script';
+import { draftMode } from 'next/headers';
 import { Ubuntu } from 'next/font/google';
 import 'globals.css';
 import Header from '@components/Header';
 import ContentWrapper from '@components/ContentWrapper';
-import { Locale, defaultLocale } from '@lib/i18n';
+import { Locale, defaultLocale, locales } from '@lib/i18n';
 import LiveVisualEditing from '@components/LiveVisualEditing';
 import Footer from '@components/Footer';
 
@@ -26,6 +28,10 @@ const baseFont = Ubuntu({
   weight: ['300', '400', '500', '700'],
 });
 
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
 export default async function RootLayout({
   children,
   params,
@@ -34,6 +40,8 @@ export default async function RootLayout({
   params: { locale: string };
 }>) {
   const locale = (params.locale || defaultLocale) as Locale;
+
+  unstable_setRequestLocale(locale);
 
   return (
     <html lang={params.locale} data-theme="nord">
@@ -49,6 +57,7 @@ export default async function RootLayout({
           <Header locale={locale} />
           <ContentWrapper>{children}</ContentWrapper>
           <Footer locale={locale} />
+          {draftMode().isEnabled && <LiveVisualEditing />}
         </div>
       </body>
     </html>

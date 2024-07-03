@@ -1,3 +1,4 @@
+import { unstable_setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 import { PortableTextBlock } from 'next-sanity';
 import { Locale } from '@lib/i18n';
@@ -48,6 +49,8 @@ export default async function Home({
   const t = await getTranslations('Home');
   const locale = (await getLocale()) as Locale;
   const slug = params?.slug ?? ['/'];
+
+  unstable_setRequestLocale(locale);
 
   const pageData = (await loadPage(locale, slug[0])).data;
 

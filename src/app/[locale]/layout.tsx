@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Metadata } from 'next';
-import { draftMode } from 'next/headers';
+import Script from 'next/script';
 import { Ubuntu } from 'next/font/google';
 import 'globals.css';
 import Header from '@components/Header';
@@ -37,12 +37,18 @@ export default async function RootLayout({
 
   return (
     <html lang={params.locale} data-theme="nord">
+      <head>
+        {process.env.NODE_ENV === 'production' && (
+          <Script
+            src={`https://cdn-cookieyes.com/client_data/9c98c86201274d8808750f69/script.js`}
+            strategy="beforeInteractive"></Script>
+        )}
+      </head>
       <body className={baseFont.className}>
         <div className="container mx-auto bg-white flex flex-col min-h-screen">
           <Header locale={locale} />
           <ContentWrapper>{children}</ContentWrapper>
           <Footer locale={locale} />
-          {draftMode().isEnabled && <LiveVisualEditing />}
         </div>
       </body>
     </html>

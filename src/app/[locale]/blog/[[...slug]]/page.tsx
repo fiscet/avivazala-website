@@ -1,4 +1,3 @@
-import { draftMode } from 'next/headers';
 import { Locale } from '@lib/i18n';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { loadPostSlugs } from 'sanity-conf/lib/fetchers';
@@ -49,11 +48,9 @@ export default async function BlogPage({
   const t = await getTranslations('Home');
   const locale = (await getLocale()) as Locale;
   const slug = params?.slug;
-  const isDraftMode = draftMode().isEnabled;
 
   return slug ? (
     <main>
-      <p>isDraftMode: {isDraftMode ? 'ok' : '---'}</p>
       <SuspenseLoading>
         Blog Page {t('hello')}: {locale} | {params.slug?.join(', ')}
         {/* <SanityContent
@@ -64,9 +61,8 @@ export default async function BlogPage({
     </main>
   ) : (
     <main>
-      <p>isDraftMode: {isDraftMode ? 'ok' : '---'}</p>
       <SuspenseLoading>
-        <PostsContainer locale={locale} isDraftMode={isDraftMode} />
+        <PostsContainer locale={locale} isDraftMode={false} />
       </SuspenseLoading>
     </main>
   );

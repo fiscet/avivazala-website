@@ -17,12 +17,14 @@ export default function Posts({
           let slugTrunk = slugPerType.get(post!._type!);
           slugTrunk = slugTrunk ? `${slugTrunk}/` : '';
 
-          return (
+          return post.slug && post.title ? (
             <Link
               key={post._id}
               href={`./${slugTrunk}${post.slug[locale]!.current}`}>
               <h2 className="p-4 hover:bg-blue-50">{post.title[locale]}</h2>
             </Link>
+          ) : (
+            <></>
           );
         })
       ) : (

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Search from './Search';
 import MainNavbarMobile from './MobileMainNavbar';
 import MainNavbarDesktop from './DesktopMainNavbar';
-import MobileMenu from './MobileMainMenu';
+import MobileMainMenu from './MobileMainMenu';
 import DesktopMainMenu from './DesktopMainMenu';
 import LangSwitcher from './LangSwitcher';
 import { SanityMenuBuilder } from 'helpers/SanityMenuBuilder';
@@ -30,7 +30,7 @@ export default async function Header({ locale }: { locale: Locale }) {
       </div>
       <div className="flex justify-between lg:hidden">
         <MainNavbarMobile>
-          <MobileMenu menu={menu} />
+          <MobileMainMenu menu={menu} />
         </MainNavbarMobile>
         <Search />
       </div>

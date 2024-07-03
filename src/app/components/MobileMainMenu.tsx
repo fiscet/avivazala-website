@@ -5,7 +5,7 @@ export type MobileMenuProps = {
   menu: WebsiteMenu;
 };
 
-export default function MobileMenu({ menu }: MobileMenuProps) {
+export default function MobileMainMenu({ menu }: MobileMenuProps) {
   return (
     <ul
       tabIndex={0}

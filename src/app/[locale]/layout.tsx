@@ -49,7 +49,7 @@ export default async function RootLayout({
         <div className="container mx-auto bg-white flex flex-col min-h-screen">
           <Header locale={locale} />
           <ContentWrapper>{children}</ContentWrapper>
-          <Footer />
+          <Footer locale={locale} />
           {draftMode().isEnabled && <LiveVisualEditing />}
         </div>
       </body>

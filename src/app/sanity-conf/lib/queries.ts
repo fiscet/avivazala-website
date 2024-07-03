@@ -15,6 +15,19 @@ export const mainMenuQuery = groq`*[_type == "navigation" && navId.current == "m
     slug
   }
 }`;
+export const footerMenuQuery = groq`*[_type == "navigation" && navId.current == "footer-menu"][0] { 
+  items,
+  "pages": items[].navigationItemLink.internalLink->{
+    _id,
+    _type,
+    slug
+  },
+  "subpages": items[].navigationItemLink.submenu[].navigationItemLink.internalLink->{
+    _id,
+    _type,
+    slug
+  }
+}`;
 
 /** Pages */
 export const pageSlugsQuery = groq`*[_type == "page"] {
@@ -23,7 +36,7 @@ export const pageSlugsQuery = groq`*[_type == "page"] {
 
 export const preparePageQuery = (locale: Locale) => `*[_type == "page" && slug[$locale].current == $slug][0] {
   title{${locale}},
-  body{${locale}},
+  body[]{${locale}},
   "pageImage": {
     "url": mainImage.asset->url,
     "dimensions": mainImage.asset->metadata.dimensions

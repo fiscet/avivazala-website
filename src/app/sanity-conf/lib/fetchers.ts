@@ -1,5 +1,5 @@
 'use server';
-import { mainMenuQuery, pageSlugsQuery, postSlugsQuery, preparePostsQuery, preparePageQuery, preparePostQuery } from "./queries";
+import { mainMenuQuery, pageSlugsQuery, postSlugsQuery, preparePostsQuery, preparePageQuery, preparePostQuery, footerMenuQuery } from "./queries";
 import { LocaleSlug, Post } from "types/sanity.types";
 import { FullNavigation, WebPage } from "types/extended-sanity.types";
 import { Locale } from "@lib/i18n";
@@ -8,6 +8,7 @@ import { loadQuery } from "./store";
 /** Navigation */
 export const loadMainMenu = () => loadQuery<FullNavigation>(mainMenuQuery);
 // export const getMainMenu = () => sanityFetch<FullNavigation>({ query: mainMenuQuery });
+export const loadFooterMenu = () => loadQuery<FullNavigation>(footerMenuQuery);
 
 /** Pages */
 export const loadPageSlugs = () => loadQuery<{ slug: LocaleSlug; }[]>(pageSlugsQuery);

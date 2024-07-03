@@ -6,7 +6,8 @@ const groups = [
     menuGroups: [
       ['page'],
       ['post', 'postCategory', 'author'],
-      ['event', 'eventType']
+      ['event', 'eventType'],
+      ['contactForm']
     ]
   },
   {
@@ -36,6 +37,6 @@ export const structure = (S: StructureBuilder) =>
                 .items(
                   group.menuGroups.flatMap(menuGroup =>
                     [S.divider(), ...menuGroup.map(sType => S.documentTypeListItem(sType).id(sType).schemaType(sType))])
-                )))
+                )));
       })
-    ])
+    ]);

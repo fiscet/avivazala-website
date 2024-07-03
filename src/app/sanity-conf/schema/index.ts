@@ -8,6 +8,7 @@ import navigationItem from './components/navigationItem';
 import navigationLink from './components/navigationLink';
 // documents
 import author from './author';
+import contactForm from './contactForm';
 import event from './event';
 import eventType from './eventType';
 import languages from './languages';
@@ -31,6 +32,7 @@ export const schemaTypes = [
   post,
   postCategory,
   author,
+  contactForm,
   event,
   eventType,
   navigation,

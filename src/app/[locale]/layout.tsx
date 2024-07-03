@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import { unstable_setRequestLocale } from 'next-intl/server';
 import { Metadata } from 'next';
 import Script from 'next/script';
 import { draftMode } from 'next/headers';
@@ -40,8 +39,6 @@ export default async function RootLayout({
   params: { locale: string };
 }>) {
   const locale = (params.locale || defaultLocale) as Locale;
-
-  unstable_setRequestLocale(locale);
 
   return (
     <html lang={params.locale} data-theme="nord">

@@ -1,11 +1,12 @@
 import { Link, Locale } from '@lib/i18n';
 import { loadFooterMenu } from '@sanityConf/lib/fetchers';
 import { SanityMenuBuilder } from 'helpers/SanityMenuBuilder';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 
 export default async function Footer({ locale }: { locale: Locale }) {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
+  unstable_setRequestLocale(locale);
 
   const t = await getTranslations('Global');
 
